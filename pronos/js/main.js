@@ -17,7 +17,7 @@ var pronoComponent = Vue.component('game-prono', {
   methods: {
     /** Team logo path */
     teamLogo: function(team) {
-      return 'img/' + escape(team) + '.png';
+      return 'img/' + escape(team.replace('è','e').replace('ç','c')) + '.png';
     },
     /** Format date dd/mm/yyyy to french*/
     formatDate: function(date) {
