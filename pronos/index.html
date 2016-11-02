@@ -16,9 +16,9 @@
 <!--<![endif]-->
 
 <style type="text/css">
-.invisible {
-    display: none;
-}
+    .visible {
+        display: block!important;
+    }
       .centered {
         display: block;
         position: absolute;
@@ -99,7 +99,7 @@
 <body id="body">
     <div id="content">
         <div class="centered" v-if="loading">Chargement...</div>
-        <div id="layout" v-bind:class="{ invisible: loading }">
+        <div id="layout" style="display:none" v-bind:class="{ visible: !loading }">
             <!-- Menu toggle -->
             <a href="#menu" id="menuLink" class="menu-link">
                 <!-- Hamburger icon -->
