@@ -1,0 +1,217 @@
+<!doctype html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parce que Toulon</title>
+
+
+
+    <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css">
+<!--[if lte IE 8]>
+<link rel="stylesheet" href="css/layouts/side-menu-old-ie.css">
+<![endif]-->
+<!--[if gt IE 8]><!-->
+<link rel="stylesheet" href="css/layouts/side-menu.css">
+<!--<![endif]-->
+
+<style type="text/css">
+.invisible {
+    display: none;
+}
+      .centered {
+        display: block;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        width: 40%;
+        height: 50%;
+        text-align: center;
+      }
+
+    #menu .ranking a{
+        color: #e9322d;
+    }
+    .content {
+        width: 100%;
+    }
+    #save {
+     display: inline-block;
+     margin-right: 10px;
+ }    
+ #cancel {
+ }
+ #save-cancel {        
+    display: block;
+    width: 130px;
+    margin: auto;
+    margin-top: 20px;
+}
+#update {        
+    display: block;
+    width: 210px;
+    margin: auto;
+    margin-top: 20px
+}
+.gameDate {
+    font-size: 1em;
+    color: green;
+    border-bottom: 1px solid;
+}
+.pure-table, .pure-table tr, .pure-table td {
+    border: none;
+}
+.finalscore {
+    font-weight: bold;
+    color: #ff7878;
+}
+.finalscorevalid {
+    color: #34FF33;
+}
+.team {
+    font-weight: bold;
+}
+.team1 {
+    text-align: right;
+}
+.team2 {
+    text-align: left;
+}
+@media (max-width: 600px) {
+  .teamlogo {
+    width: 30px;
+  }
+  label, p {
+    font-size: 13px;
+  }
+  .pure-table td {
+    padding: 8px;
+  }
+}
+</style>
+
+
+
+
+
+</head>
+<body id="body">
+    <div id="content">
+        <div class="centered" v-if="loading">Chargement...</div>
+        <div id="layout" v-bind:class="{ invisible: loading }">
+            <!-- Menu toggle -->
+            <a href="#menu" id="menuLink" class="menu-link">
+                <!-- Hamburger icon -->
+                <span></span>
+            </a>
+
+            <div id="menu">
+                <div class="pure-menu">
+                    <ul class="pure-menu-list">
+                        <li class="pure-menu-item ranking"><a href="#" class="pure-menu-link">Classement</a></li>
+                    </ul>
+                    <ul class="pure-menu-list">
+                        <li v-for="name in playerNames" class="pure-menu-item" v-bind:class="{ 'pure-menu-selected': playerName === name }" v-on:click="loadPlayer(name)"><a href="#" class="pure-menu-link">{{ name }}</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="centered" v-if="!playerData">
+            Choisir un joueur dans le menu.
+            </div>
+            <div id="main" v-if="playerData">
+                <div class="header">
+                    <h1>{{ playerData.name }}</h1>
+                    <h2>{{ playerData.motto }}</h2>
+                </div>
+                
+                <div class="content">
+                    <div v-if="updating" id="save-cancel">
+                        <button class="pure-button pure-button-primary" v-on:click="save()" id="save">Sauvegarder</button>
+                    </div>
+                    <button v-else class="pure-button" v-on:click="startUpdating()" id="update">Commencer les pronos</button>
+                    <div v-for="game in games">
+                        <game-prono :game="game" :updating="updating" :prono="playerData.games[game.id]"></game-prono>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- component templates -->
+    <script type="text/x-template" id="prono-template">
+        <div>
+            <h3 class="gameDate" v-if="game.score1">{{ formatDate(game.date) }} (match terminé)</h3>
+            <h3 class="gameDate" v-else>{{ formatDate(game.date) }}</h3>
+            <div v-if="game.score1">
+             <table class="pure-table">
+                <tr>
+                    <td rowspan="2"><img class="teamlogo" :src="teamLogo(game.team1)"></td>
+                    <td rowspan="2"><label for="score1-{{game.id}}" class="team team1">{{ game.team1 }}</label></td>
+                    <td><span class="">{{ game.score1 }}</span><span v-if="game.bo1">&nbsp;&nbsp;(BO)</span></td>
+                    <td><span class="">{{ game.score2 }}</span><span v-if="game.bo2">&nbsp;&nbsp;(BO)</span></td>
+                    <td rowspan="2"><label for="score2-{{game.id}}" class="team team2">{{ game.team2 }}</label></td>
+                    <td rowspan="2"><img class="teamlogo" :src="teamLogo(game.team2)"></td><td>(Score final)</td>
+                    
+                </tr>
+                <tr>
+                    <td><span class="finalscore" v-bind:class="{ finalscorevalid: game.score1 === prono.score1 }">{{ prono.score1 }}</span><span v-if="prono.bo1" class="finalscore" v-bind:class="{ finalscorevalid: game.bo1 === prono.bo1 }" >&nbsp;&nbsp;(BO)</span></td>
+                    <td><span class="finalscore" v-bind:class="{ finalscorevalid: game.score2 === prono.score2 }">{{ prono.score2 }}</span><span v-if="prono.bo2" class="finalscore" v-bind:class="{ finalscorevalid: game.bo2 === prono.bo2 }">&nbsp;&nbsp;(BO)</span></td>
+                    <td>(Prono)</td>
+                </tr>
+            </table>
+        </div>
+        <table v-else class="pure-table">
+            <tr>
+                <td><img class="teamlogo" :src="teamLogo(game.team1)"></td>
+                <td><label for="score1-{{game.id}}" class="team team1">{{ game.team1 }}</label></td>
+                <td v-if="updating">
+                     <select id="score1-{{game.id}}" v-model="prono.score1">
+                        <option v-bind:value="0">0</option>
+                        <option v-for="s in 120">{{ s }}</option>
+                    </select>
+                </td>
+                <td v-else>{{ prono.score1 }}</td>
+                <td v-if="updating">
+                    <select id="score2-{{game.id}}" v-model="prono.score2">
+                        <option v-bind:value="0">0</option>
+                        <option v-for="s in 120">{{ s }}</option>
+                    </select>
+                </td>
+                <td v-else>{{ prono.score2 }}</td>
+                <td><label for="score2-{{game.id}}" class="team team2">{{ game.team2 }}</label></td>                
+                <td><img class="teamlogo" :src="teamLogo(game.team2)"></td>
+            </tr>
+            <tr>
+                <td colspan="7" v-if="updating">
+                    <label for="bo1-{{game.id}}">
+                     Bonus offensif {{ game.team1 }} <input id="bo1-{{game.id}}" type="checkbox" v-model="prono.bo1">
+                 </label>
+                 <br/>
+                 <label for="bo1-{{game.id}}">
+                     Bonus offensif {{ game.team2 }} <input id="bo2-{{game.id}}" type="checkbox" v-model="prono.bo2">
+                 </label>
+             </td>
+             <td colspan="7" v-else>
+                 <p for="bo1-{{game.id}}" v-if="prono.bo1">
+                     Bonus offensif {{ game.team1 }}
+                 </p>
+                 <p for="bo1-{{game.id}}" v-if="prono.bo2">
+                     Bonus offensif {{ game.team2 }}
+                 </p>
+             </td>
+         </tr>
+     </table>
+ </div>
+</script>
+
+
+
+
+<script src="js/vue.min.js"></script>
+<script src="js/data.js"></script>
+<script src="js/main.js"></script>
+<script src="js/ui.js"></script>
+
+</body>
+</html>
