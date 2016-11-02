@@ -19,16 +19,6 @@ var POST = function(url, data, cb) {
 DATA.loadData = function(cb) {
   DATA.games = [
   {
-    id: 'toulon-grenoble-1',
-    date: '29/10/2016',
-    team1: 'Toulon',
-    team2: 'Grenoble',
-    score1: 42,
-    score2: 12,
-    bo1: true,
-    bo2: false,
-  },
-  {
     id: 'lyonou-toulon-1',
     date: '6/11/2016',
     team1: 'Lyon OU',
@@ -67,9 +57,18 @@ DATA.loadData = function(cb) {
     score2: null,
     bo1: null,
     bo2: null, 
+  },
+  {
+    id: 'toulon-grenoble-1',
+    date: '29/10/2016',
+    team1: 'Toulon',
+    team2: 'Grenoble',
+    score1: 42,
+    score2: 12,
+    bo1: true,
+    bo2: false,
   }
   ];
-  DATA.games.reverse();
 
   DATA.playerNames = ['Aurélien', 'Bastien', 'Cyrille', 'Jean-Sébastien', 'Mathias', 'Mickael', 'Riad', 'Thomas'];
 
