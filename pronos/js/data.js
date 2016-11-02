@@ -71,7 +71,7 @@ DATA.loadData = function(cb) {
   ];
   DATA.games.reverse();
 
-  DATA.playerNames = ['Bastien', 'Cyrille', 'Jean-Sébastien', 'Mathias', 'Mickael', 'Riad', 'Thomas'];
+  DATA.playerNames = ['Aurélien', 'Bastien', 'Cyrille', 'Jean-Sébastien', 'Mathias', 'Mickael', 'Riad', 'Thomas'];
 
   DATA.playerDatas = {};
   /*
