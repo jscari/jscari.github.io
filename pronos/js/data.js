@@ -1,4 +1,4 @@
-var webmem = 'http://webmem-147501.appspot.com//api/v1/prono/';
+var webmem = 'http://webmem.io/api/v1/prono/';
 // set 767eabed-472e-893e-088f-14d52afafd14
 var DATA = {
   games:[],
@@ -58,6 +58,7 @@ DATA.loadData = function(cb) {
     bo1: null,
     bo2: null, 
   },
+  // terminés
   {
     id: 'toulon-grenoble-1',
     date: '29/10/2016',
@@ -65,6 +66,26 @@ DATA.loadData = function(cb) {
     team2: 'Grenoble',
     score1: 42,
     score2: 12,
+    bo1: true,
+    bo2: false,
+  },
+  {
+    id: 'toulon-la-rochelle-1',
+    date: '08/10/2016',
+    team1: 'Toulon',
+    team2: 'La Rochelle',
+    score1: 17,
+    score2: 17,
+    bo1: false,
+    bo2: false,
+  },
+  {
+    id: 'toulon-montpellier-1',
+    date: '02/10/2016',
+    team1: 'Toulon',
+    team2: 'Montpellier',
+    score1: 28,
+    score2: 6,
     bo1: true,
     bo2: false,
   }

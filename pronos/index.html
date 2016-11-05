@@ -78,6 +78,21 @@
 .team2 {
     text-align: left;
 }
+.row-with-logo {
+    height: 110px;
+}
+.ranking-table {
+    width: 400px;
+    margin: auto;
+}
+.ranking-table th {
+    color: white;
+    background: #e9322d;
+    padding: 2px 15px;!important
+}
+.ranking-table td {
+    text-align: center
+}
 @media (max-width: 600px) {
   .teamlogo {
     width: 30px;
@@ -109,17 +124,38 @@
             <div id="menu">
                 <div class="pure-menu">
                     <ul class="pure-menu-list">
-                        <li class="pure-menu-item ranking"><a href="#" class="pure-menu-link">Classement</a></li>
+                        <li class="pure-menu-item ranking" v-on:click="loadRanking()"><a href="#" class="pure-menu-link">Résultats</a></li>
                     </ul>
                     <ul class="pure-menu-list">
                         <li v-for="name in playerNames" class="pure-menu-item" v-bind:class="{ 'pure-menu-selected': playerName === name }" v-on:click="loadPlayer(name)"><a href="#" class="pure-menu-link">{{ name }}</a></li>
                     </ul>
                 </div>
             </div>
-            <div class="centered" v-if="!playerData">
-            Choisir un joueur dans le menu.
+            <div id="ranking" v-if="!playerName && games">
+                <!-- ranking -->
+                <div class="content">
+                    <h1>Classement</h1>
+                    <table class="ranking-table">
+                    <thead>
+                        <th>Joueur</th>
+                        <th>Score</th>
+                    </thead>
+                    <tbody>
+                        <tr v-for="name in playerNames">
+                            <td>{{name}}</td>
+                            <td>{{playerScore(name)}}</td>
+                        </tr>
+                    </tbody>
+                    </table>
+                    <br/>           
+                    <h1>Résultats</h1>
+                    <div v-for="game in games">
+                        <game-results :game="game"></game-results>
+                    </div>
+                </div>
             </div>
             <div id="main" v-if="playerData">
+            <!-- player page -->
                 <div class="header">
                     <h1>{{ playerData.name }}</h1>
                     <h2>{{ playerData.motto }}</h2>
@@ -139,13 +175,38 @@
     </div>
 
     <!-- component templates -->
+
+    <script type="text/x-template" id="results-template">
+        <div>
+            <h3 class="gameDate" v-if="game.score1">{{ formatDate(game.date) }} (match terminé)</h3>
+            <h3 class="gameDate" v-else>{{ formatDate(game.date) }}</h3>
+             <table class="pure-table">
+                <tr class="row-with-logo">
+                    <td rowspan="2"><img class="teamlogo" :src="teamLogo(game.team1)"></td>
+                    <td rowspan="2"><label for="score1-{{game.id}}" class="team team1">{{ game.team1}}</label></td>
+                    <td><span class="">{{ game.score1 || '-' }}</span><span v-if="game.bo1">&nbsp;&nbsp;(BO)</span></td>
+                    <td><span class="">{{ game.score2 || '-' }}</span><span v-if="game.bo2">&nbsp;&nbsp;(BO)</span></td>
+                    <td rowspan="2"><label for="score2-{{game.id}}" class="team team2">{{ game.team2}}</label></td>                  
+                    <td rowspan="2"><img class="teamlogo" :src="teamLogo(game.team2)"></td>               
+                </tr>
+                <tr><tr/>
+                <tr v-for="name in DATA.playerNames" v-if="DATA.playerDatas[name] && DATA.playerDatas[name].games && DATA.playerDatas[name].games[game.id] && (DATA.playerDatas[name].games[game.id].score1 + DATA.playerDatas[name].games[game.id].score2) != 0">
+                <td colspan="2">{{ name }}</td>
+                <td>{{ DATA.playerDatas[name].games[game.id].score1 }}<span v-if="DATA.playerDatas[name].games[game.id].bo1">&nbsp;&nbsp;(BO)</span></td>
+                <td >{{ DATA.playerDatas[name].games[game.id].score2 }}<span v-if="DATA.playerDatas[name].games[game.id].bo2">&nbsp;&nbsp;(BO)</span></td>
+
+                </tr>
+            </table>
+
+        </div>
+    </script>
     <script type="text/x-template" id="prono-template">
         <div>
             <h3 class="gameDate" v-if="game.score1">{{ formatDate(game.date) }} (match terminé)</h3>
             <h3 class="gameDate" v-else>{{ formatDate(game.date) }}</h3>
-            <div v-if="game.score1">
+            <div v-if="game.score1 && false">
              <table class="pure-table">
-                <tr>
+                <tr class="row-with-logo">
                     <td rowspan="2"><img class="teamlogo" :src="teamLogo(game.team1)"></td>
                     <td rowspan="2"><label for="score1-{{game.id}}" class="team team1">{{ game.team1 }}</label></td>
                     <td><span class="">{{ game.score1 }}</span><span v-if="game.bo1">&nbsp;&nbsp;(BO)</span></td>
