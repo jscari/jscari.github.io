@@ -1,4 +1,5 @@
 var webmem = 'http://webmem.io/api/v1/prono/';
+// webmem = 'http://webmem.localhost:8080/api/v1/jsc/';
 // set 767eabed-472e-893e-088f-14d52afafd14
 var DATA = {
   games:[],
@@ -18,16 +19,6 @@ var POST = function(url, data, cb) {
 
 DATA.loadData = function(cb) {
   DATA.games = [
-  {
-    id: 'lyonou-toulon-1',
-    date: '6/11/2016',
-    team1: 'Lyon OU',
-    team2: 'Toulon',
-    score1: null,
-    score2: null,
-    bo1: null,
-    bo2: null, 
-  },
   {
     id: 'toulon-sf-1',
     date: '13/11/2016',
@@ -59,6 +50,16 @@ DATA.loadData = function(cb) {
     bo2: null, 
   },
   // terminés
+  {
+    id: 'lyonou-toulon-1',
+    date: '6/11/2016',
+    team1: 'Lyon OU',
+    team2: 'Toulon',
+    score1: 27,
+    score2: 13,
+    bo1: null,
+    bo2: null, 
+  },
   {
     id: 'toulon-grenoble-1',
     date: '29/10/2016',
@@ -106,6 +107,18 @@ DATA.loadData = function(cb) {
   r['Thomas'] = getString('Thomas') || '{}';
   r = JSON.stringify(r);
   returns(r);
+
+
+const players = ['Aurélien', 'Bastien', 'Cyrille', 'Jean-Sébastien', 'Mathias', 'Mickael', 'Riad','Thomas'];
+getString(players, (err, res) => {
+Object.keys(res).map((k) => {
+   res[k] = (res[k] ) || '{}';
+});
+returns(res);
+});
+
+
+
   */
   POST(webmem + 'eval/playerDatas', null, function(err, data) {
     try {
@@ -126,6 +139,12 @@ DATA.saveData = function(playerName, data, cb) {
   if (query.playerName && body) {
     setString(query.playerName, body);
   }
+
+
+  if (query.playerName && body) {
+    setString(query.playerName, body, returns);
+  }
+  
   */
   POST(webmem + 'eval/savePlayerData?playerName=' + encodeURIComponent(playerName), JSON.stringify(data), cb);
 };

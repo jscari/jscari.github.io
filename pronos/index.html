@@ -141,16 +141,21 @@
                         <th>Score</th>
                     </thead>
                     <tbody>
-                        <tr v-for="name in playerNames">
+                        <tr v-for="name in rankedPlayerNames">
                             <td>{{name}}</td>
                             <td>{{playerScore(name)}}</td>
                         </tr>
                     </tbody>
                     </table>
+                    <br/>
+                    <pre>1 point par vainqueur/match nul trouvé
+1 point par bonus trouvé
+3 points pour le meilleur pronostiqueur du match (score le plus près)
+                    </pre>
                     <br/>           
                     <h1>Résultats</h1>
                     <div v-for="game in games">
-                        <game-results :game="game"></game-results>
+                        <game-results :game="game" :bestplayer="bestPlayerPerGame[game.id]" :scoreplayer="scorePlayerPerGame[game.id]"></game-results>
                     </div>
                 </div>
             </div>
@@ -194,6 +199,9 @@
                 <td colspan="2">{{ name }}</td>
                 <td>{{ DATA.playerDatas[name].games[game.id].score1 }}<span v-if="DATA.playerDatas[name].games[game.id].bo1">&nbsp;&nbsp;(BO)</span></td>
                 <td >{{ DATA.playerDatas[name].games[game.id].score2 }}<span v-if="DATA.playerDatas[name].games[game.id].bo2">&nbsp;&nbsp;(BO)</span></td>
+                <td v-if="scoreplayer && scoreplayer[name] === 1">=> {{ scoreplayer[name] }} point</td>
+                <td v-if="scoreplayer && scoreplayer[name] > 1">=> {{ scoreplayer[name] }} points</td>
+                <td v-if="bestplayer && bestplayer.indexOf(name) >= 0"><b>Meilleur Prono</b></td>
 
                 </tr>
             </table>

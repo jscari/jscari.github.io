@@ -28,7 +28,7 @@ Vue.component('team-score', {
 
 var resultsComponent = Vue.component('game-results', {
   template: '#results-template',
-  props: ['game'],
+  props: ['game', 'bestplayer', 'scoreplayer'],
   methods: {
     formatDate: _formatDate,
     teamLogo: _teamLogo
@@ -62,6 +62,9 @@ var demo = new Vue({
     loading: true,
     updating: false,
     playerNames: null,
+    rankedPlayerNames: null,
+    bestPlayerPerGame: {},
+    scorePlayerPerGame: {},
     playerName: null,
     playerData: null,
     scores: []
@@ -76,7 +79,6 @@ var demo = new Vue({
       this.playerNames = DATA.playerNames;
       this.loading = false;
       // calcul des scores
-      console.log('calcul')
       for (var p = 0; p < this.playerNames.length; p++) {
         this.scores[this.playerNames[p]] = 0;  
       }
@@ -87,19 +89,71 @@ var demo = new Vue({
           var bo2 = game.bo2;
           var bd1 = game.score2 > game.score1 && (game.score2 - game.score1) < 6;
           var bd2 = game.score1 > game.score2 && (game.score1 - game.score2) < 6;
+          var bestProno = null;
+          var bestPronoDiff = 10000000;
+          this.scorePlayerPerGame[game.id] = {};
           for (var p = 0; p < this.playerNames.length; p++) {
-            var prono = DATA.playerDatas[this.playerNames[p]].games && DATA.playerDatas[this.playerNames[p]].games[game.id];
-            if(!prono || (prono.score1 + prono.score2) === 0 ) continue;
-            var p_bd1 = prono.score2 > prono.score1 && (prono.score2 - prono.score1) < 6;
-            var p_bd2 = prono.score1 > prono.score2 && (prono.score1 - prono.score2) < 6; 
-            if (game.bo1 && prono.bo1) this.scores[this.playerNames[p]]++;
-            if (game.bo2 && prono.bo2) this.scores[this.playerNames[p]]++;
-            if (bd1 && p_bd1) this.scores[this.playerNames[p]]++;
-            if (bd2 && p_bd2) this.scores[this.playerNames[p]]++;
+            this.scorePlayerPerGame[game.id][this.playerNames[p]] = 0;
+            var prono = DATA.playerDatas[this.playerNames[p]] && DATA.playerDatas[this.playerNames[p]].games && DATA.playerDatas[this.playerNames[p]].games[game.id];
+            if(!prono || (parseInt(prono.score1) + parseInt(prono.score2)) === 0 ) continue;
+            var p_bd1 = parseInt(prono.score2) > parseInt(prono.score1) && (parseInt(prono.score2) - parseInt(prono.score1)) < 6;
+            var p_bd2 = parseInt(prono.score1) > parseInt(prono.score2) && (parseInt(prono.score1) - parseInt(prono.score2)) < 6;
+            if (game.score1 > game.score2 && parseInt(prono.score1) > parseInt(prono.score2)) {
+              this.scores[this.playerNames[p]]++;
+              this.scorePlayerPerGame[game.id][this.playerNames[p]]++;
+            }
+            if (game.score1 < game.score2 && parseInt(prono.score1) < parseInt(prono.score2)) {
+              this.scores[this.playerNames[p]]++;
+              this.scorePlayerPerGame[game.id][this.playerNames[p]]++;
+            }
+            if (game.score1 === game.score2 && parseInt(prono.score1) === parseInt(prono.score2)) {
+              this.scores[this.playerNames[p]]++;
+              this.scorePlayerPerGame[game.id][this.playerNames[p]]++;
+            }
+            if (game.bo1 && prono.bo1) {
+              this.scores[this.playerNames[p]]++;
+              this.scorePlayerPerGame[game.id][this.playerNames[p]]++;
+            }
+            if (game.bo2 && prono.bo2) {
+              this.scores[this.playerNames[p]]++;
+              this.scorePlayerPerGame[game.id][this.playerNames[p]]++;
+            }
+            if (game.score1 < game.score2 && bd1 && p_bd1) {
+              this.scores[this.playerNames[p]]++;
+              this.scorePlayerPerGame[game.id][this.playerNames[p]]++;
+            }
+            if (game.score1 > game.score2 && bd2 && p_bd2) {
+              this.scores[this.playerNames[p]]++;
+              this.scorePlayerPerGame[game.id][this.playerNames[p]]++;
+            }
+            var pronoDiff = Math.abs(game.score1 - parseInt(prono.score1)) + Math.abs(game.score2 - parseInt(prono.score2)) ;
+            if (pronoDiff < bestPronoDiff) {
+              bestProno = [this.playerNames[p]];
+              bestPronoDiff = pronoDiff;
+            } else if (pronoDiff === bestPronoDiff) {
+              bestProno.push(this.playerNames[p]);
+            } 
+
+          }
+          if(bestProno) {
+            this.bestPlayerPerGame[game.id] = bestProno;
+            bestProno.map(function(playerName) {
+              this.scores[playerName] += 3;
+              this.scorePlayerPerGame[game.id][playerName] += 3;
+            }.bind(this));
           }
         }
         
       }
+      this.rankedPlayerNames = DATA.playerNames.map(function(playerName) {
+        return this.scores[playerName] + '_' + playerName;
+      }.bind(this));
+      this.rankedPlayerNames.sort(function(a,b) { 
+        return parseInt(b) - parseInt(a);
+      });
+      this.rankedPlayerNames = this.rankedPlayerNames.map(function(playerName) {
+        return playerName.substr(playerName.indexOf('_')+1);
+      }.bind(this));
     }.bind(this));
   },
   methods: {
@@ -115,7 +169,10 @@ var demo = new Vue({
       if(!this.playerData.games) { this.playerData.games = {}; }
       if(!this.playerData.name) { this.playerData.name = name; }
       for(var g = 0; g < this.games.length; g++) {
-        var gameId = this.games[g].id
+        var gameId = this.games[g].id;
+        if(!this.playerData.games) {
+          this.playerData.games = {};
+        }
         if (!this.playerData.games[gameId]) {
           this.playerData.games[gameId] = {
              score1: 0,
