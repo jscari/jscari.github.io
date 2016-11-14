@@ -1,5 +1,5 @@
-var webmem = 'http://webmem.io/api/v1/prono/';
-// webmem = 'http://webmem.localhost:8080/api/v1/jsc/';
+var webmem = 'http://prono.webmem.io/';
+// webmem = 'http://jsc.webmem.localhost:8080/';
 // set 767eabed-472e-893e-088f-14d52afafd14
 var DATA = {
   games:[],
@@ -19,16 +19,6 @@ var POST = function(url, data, cb) {
 
 DATA.loadData = function(cb) {
   DATA.games = [
-  {
-    id: 'toulon-sf-1',
-    date: '13/11/2016',
-    team1: 'Toulon',
-    team2: 'Stade Français',
-    score1: null,
-    score2: null,
-    bo1: null,
-    bo2: null, 
-  },
   {
     id: 'castres-toulon-1',
     date: '19/11/2016',
@@ -51,14 +41,24 @@ DATA.loadData = function(cb) {
   },
   // terminés
   {
+    id: 'toulon-sf-1',
+    date: '13/11/2016',
+    team1: 'Toulon',
+    team2: 'Stade Français',
+    score1: 31,
+    score2: 12,
+    bo1: false,
+    bo2: false, 
+  },
+  {
     id: 'lyonou-toulon-1',
     date: '6/11/2016',
     team1: 'Lyon OU',
     team2: 'Toulon',
     score1: 27,
     score2: 13,
-    bo1: null,
-    bo2: null, 
+    bo1: false,
+    bo2: false, 
   },
   {
     id: 'toulon-grenoble-1',
@@ -96,7 +96,7 @@ DATA.loadData = function(cb) {
 
   DATA.playerDatas = {};
   /*
-  eval/playerDatas
+  run/playerDatas
   var r = {};
   r['Bastien'] = getString('Bastien') || '{}';
   r['Cyrille'] = getString('Cyrille') || '{}';
@@ -120,7 +120,7 @@ returns(res);
 
 
   */
-  POST(webmem + 'eval/playerDatas', null, function(err, data) {
+  POST(webmem + 'run/playerDatas', null, function(err, data) {
     try {
       DATA.playerDatas = JSON.parse(data);
       for(var playerName in DATA.playerDatas) {
@@ -135,7 +135,7 @@ returns(res);
 
 DATA.saveData = function(playerName, data, cb) {
   /*
-  eval/savePlayerData?playerName=xxx
+  run/savePlayerData?playerName=xxx
   if (query.playerName && body) {
     setString(query.playerName, body);
   }
@@ -146,5 +146,5 @@ DATA.saveData = function(playerName, data, cb) {
   }
   
   */
-  POST(webmem + 'eval/savePlayerData?playerName=' + encodeURIComponent(playerName), JSON.stringify(data), cb);
+  POST(webmem + 'run/savePlayerData?playerName=' + encodeURIComponent(playerName), JSON.stringify(data), cb);
 };
