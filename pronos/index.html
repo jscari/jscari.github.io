@@ -208,7 +208,10 @@
                 <td>{{ DATA.playerDatas[name].games[game.id].score1 }}<span v-if="DATA.playerDatas[name].games[game.id].bo1">&nbsp;&nbsp;(BO)</span></td>
                 <td >{{ DATA.playerDatas[name].games[game.id].score2 }}<span v-if="DATA.playerDatas[name].games[game.id].bo2">&nbsp;&nbsp;(BO)</span></td>
                 <td v-if="scoreplayer && scoreplayer[name] === 1">=> {{ scoreplayer[name] }} point</td>
+                <td v-if="scoreplayer && scoreplayer[name] === 0">=> {{ scoreplayer[name] }} point</td>
+                <td v-if="scoreplayer && scoreplayer[name] === -1">=> {{ scoreplayer[name] }} point</td>
                 <td v-if="scoreplayer && scoreplayer[name] > 1">=> {{ scoreplayer[name] }} points</td>
+                <td v-if="scoreplayer && scoreplayer[name] < -1">=> {{ scoreplayer[name] }} points</td>
                 <td v-if="bestplayer && bestplayer.indexOf(name) >= 0"><b>Meilleur Prono</b></td>
 
                 </tr>
