@@ -114,6 +114,10 @@ var demo = new Vue({
               this.scores[this.playerNames[p]]++;
               this.scorePlayerPerGame[game.id][this.playerNames[p]]++;
             }
+            if (!game.bo1 && prono.bo1) {
+              this.scores[this.playerNames[p]]--;
+              this.scorePlayerPerGame[game.id][this.playerNames[p]]--;
+            }
             if (game.bo2 && prono.bo2) {
               this.scores[this.playerNames[p]]++;
               this.scorePlayerPerGame[game.id][this.playerNames[p]]++;
