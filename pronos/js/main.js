@@ -28,7 +28,7 @@ Vue.component('team-score', {
 
 var resultsComponent = Vue.component('game-results', {
   template: '#results-template',
-  props: ['game', 'bestplayer', 'scoreplayer'],
+  props: ['game', 'bestplayer', 'scoreplayer', 'communistresults'],
   methods: {
     formatDate: _formatDate,
     teamLogo: _teamLogo
@@ -67,7 +67,8 @@ var demo = new Vue({
     scorePlayerPerGame: {},
     playerName: null,
     playerData: null,
-    scores: []
+    scores: [],
+    communistMode: false,
   },
   created: function () {
     DATA.loadData(function(errLoad){
@@ -165,6 +166,17 @@ var demo = new Vue({
     }.bind(this));
   },
   methods: {
+    communistModeOnOff: function() {
+        this.communistMode = !this.communistMode;
+        if(this.communistMode) {
+          if(! window.international) {
+             window.international = new Audio('https://upload.wikimedia.org/wikipedia/en/d/d1/Internationale_orchestral_arrangement.ogg');
+          }
+          window.international.play()
+        } else {
+          window.international.pause();
+        }
+    },
     loadRanking: function() {
       this.updating = false;
       this.playerName = null;
