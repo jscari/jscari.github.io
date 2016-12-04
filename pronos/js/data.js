@@ -19,17 +19,17 @@ var POST = function(url, data, cb) {
 
 DATA.loadData = function(cb) {
   DATA.games = [
+  // terminés
   {
     id: 'toulon-bordeaux-bègles-1',
     date: '4/12/2016',
     team1: 'Toulon',
     team2: 'Bordeaux-Bègles',
-    score1: null,
-    score2: null,
-    bo1: null,
-    bo2: null, 
+    score1: 37,
+    score2: 10,
+    bo1: true,
+    bo2: false, 
   },
-  // terminés
   {
     id: 'castres-toulon-1',
     date: '19/11/2016',
