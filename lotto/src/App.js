@@ -35,6 +35,7 @@ class App extends Component {
     const ri = Math.floor(Math.random() * availableNumbers.length);
     const n = availableNumbers.splice(ri, 1);
     balls.unshift(<Ball n={n} key={n}/>);
+    balls.sort(function(a, b){ return a.props.n[0] - b.props.n[0]});
     this.setState({ balls: balls, availableNumbers: availableNumbers })
   }
 }
