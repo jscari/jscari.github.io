@@ -20,17 +20,7 @@ var POST = function(url, data, cb) {
 DATA.loadData = function(cb) {
   DATA.games = [
   {
-    id: 'toulon-racing92-2',
-    date: '01/01/2017',
-    team1: 'Toulon',
-    team2: 'Racing 92',
-    score1: null,
-    score2: null,
-    bo1: null,
-    bo2: null, 
-  },
-  {
-    id: 'toulon-clermont-2',
+    id: 'clermont-toulon-2',
     date: '08/01/2017',
     team1: 'Clermont',
     team2: 'Toulon',
@@ -39,8 +29,48 @@ DATA.loadData = function(cb) {
     bo1: null,
     bo2: null, 
   },
-  // terminés  
-   {
+  {
+    id: 'toulon-la-rochelle-2',
+    date: '28/01/2017',
+    team1: 'Toulon',
+    team2: 'La Rochelle',
+    score1: null,
+    score2: null,
+    bo1: null,
+    bo2: null, 
+  },
+  {
+    id: 'toulon-lyon-ou-2',
+    date: '18/02/2017',
+    team1: 'Toulon',
+    team2: 'Lyon OU',
+    score1: null,
+    score2: null,
+    bo1: null,
+    bo2: null, 
+  },
+  {
+    id: 'brive-toulon-2',
+    date: '04/03/2017',
+    team1: 'Brive',
+    team2: 'Toulon',
+    score1: null,
+    score2: null,
+    bo1: null,
+    bo2: null, 
+  },
+  // terminés   
+  {
+    id: 'toulon-racing92-2',
+    date: '01/01/2017',
+    team1: 'Toulon',
+    team2: 'Racing 92',
+    score1: 17,
+    score2: 11,
+    bo1: false,
+    bo2: false, 
+  },
+  {
     id: 'montpellier-toulon-2',
     date: '23/12/2016',
     team1: 'Montpellier',
