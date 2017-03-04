@@ -1,5 +1,5 @@
-var webmem = 'http://prono.webmem.io/';
-// webmem = 'http://jsc.webmem.localhost:8080/';
+var webmem = 'http://pronos.webmem.io/';
+// webmem = 'http://pronos.webmem.lo:8080/';
 // set 767eabed-472e-893e-088f-14d52afafd14
 var DATA = {
   games:[],
@@ -20,26 +20,6 @@ var POST = function(url, data, cb) {
 DATA.loadData = function(cb) {
   DATA.games = [
   {
-    id: 'toulon-la-rochelle-2',
-    date: '28/01/2017',
-    team1: 'Toulon',
-    team2: 'La Rochelle',
-    score1: null,
-    score2: null,
-    bo1: null,
-    bo2: null, 
-  },
-  {
-    id: 'toulon-lyon-ou-2',
-    date: '18/02/2017',
-    team1: 'Toulon',
-    team2: 'Lyon OU',
-    score1: null,
-    score2: null,
-    bo1: null,
-    bo2: null, 
-  },
-  {
     id: 'brive-toulon-2',
     date: '04/03/2017',
     team1: 'Brive',
@@ -49,7 +29,47 @@ DATA.loadData = function(cb) {
     bo1: null,
     bo2: null, 
   },
-  // terminés
+  {
+    id: 'toulon-bayonne-2',
+    date: '11/03/2017',
+    team1: 'Toulon',
+    team2: 'Bayonne',
+    score1: null,
+    score2: null,
+    bo1: null,
+    bo2: null, 
+  },
+  {
+    id: 'grenoble-toulon-2',
+    date: '19/03/2017',
+    team1: 'Grenoble',
+    team2: 'Toulon',
+    score1: null,
+    score2: null,
+    bo1: null,
+    bo2: null, 
+  },
+  // terminés  
+  {
+    id: 'toulon-lyon-ou-2',
+    date: '18/02/2017',
+    team1: 'Toulon',
+    team2: 'Lyon OU',
+    score1: 31,
+    score2: 17,
+    bo1: false,
+    bo2: false, 
+  },
+  {
+    id: 'toulon-la-rochelle-2',
+    date: '28/01/2017',
+    team1: 'Toulon',
+    team2: 'La Rochelle',
+    score1: 20,
+    score2: 23,
+    bo1: false,
+    bo2: false, 
+  },
   {
     id: 'clermont-toulon-2',
     date: '08/01/2017',
@@ -81,7 +101,7 @@ DATA.loadData = function(cb) {
     bo2: false, 
   },
   {
-    id: 'toulon-bordeaux-bègles-1',
+    id: 'toulon-bordeaux-begles-1',
     date: '4/12/2016',
     team1: 'Toulon',
     team2: 'Bordeaux-Bègles',
@@ -156,33 +176,18 @@ DATA.loadData = function(cb) {
 
   DATA.playerDatas = {};
   /*
-  run/playerDatas
-  var r = {};
-  r['Bastien'] = getString('Bastien') || '{}';
-  r['Cyrille'] = getString('Cyrille') || '{}';
-  r['Jean-Sébastien'] = getString('Jean-Sébastien') || '{}';
-  r['Mathias'] = getString('Mathias') || '{}';
-  r['Mickael'] = getString('Mickael') || '{}';
-  r['Riad'] = getString('Riad') || '{}';
-  r['Thomas'] = getString('Thomas') || '{}';
-  r = JSON.stringify(r);
-  returns(r);
-
-
-const players = ['Aurélien', 'Bastien', 'Cyrille', 'Jean-Sébastien', 'Mathias', 'Mickael', 'Riad','Thomas'];
-getString(players, (err, res) => {
-Object.keys(res).map((k) => {
-   res[k] = (res[k] ) || '{}';
-});
-returns(res);
-});
-
-
-
+  const players = ['Aurélien', 'Bastien', 'Cyrille', 'Jean-Sébastien', 'Mathias', 'Mickael', 'Riad','Thomas'];
+  get(players, (err, res) => {
+    Object.keys(res).map((k) => {
+       res[k] = (res[k] ) || '{}';
+    });
+    send(null, res);
+  });
   */
   POST(webmem + 'run/playerDatas', null, function(err, data) {
     try {
       DATA.playerDatas = JSON.parse(data);
+      console.log('couou')
       for(var playerName in DATA.playerDatas) {
         DATA.playerDatas[playerName] = JSON.parse(DATA.playerDatas[playerName]);
       }
@@ -195,16 +200,12 @@ returns(res);
 
 DATA.saveData = function(playerName, data, cb) {
   /*
-  run/savePlayerData?playerName=xxx
   if (query.playerName && body) {
-    setString(query.playerName, body);
+    set(query.playerName, body);
   }
-
-
   if (query.playerName && body) {
-    setString(query.playerName, body, returns);
-  }
-  
+    set(query.playerName, body, returns);
+  }  
   */
   POST(webmem + 'run/savePlayerData?playerName=' + encodeURIComponent(playerName), JSON.stringify(data), cb);
 };
