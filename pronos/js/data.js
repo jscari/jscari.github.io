@@ -20,16 +20,6 @@ var POST = function(url, data, cb) {
 DATA.loadData = function(cb) {
   DATA.games = [
   {
-    id: 'brive-toulon-2',
-    date: '04/03/2017',
-    team1: 'Brive',
-    team2: 'Toulon',
-    score1: null,
-    score2: null,
-    bo1: null,
-    bo2: null, 
-  },
-  {
     id: 'toulon-bayonne-2',
     date: '11/03/2017',
     team1: 'Toulon',
@@ -50,6 +40,16 @@ DATA.loadData = function(cb) {
     bo2: null, 
   },
   // terminés  
+  {
+    id: 'brive-toulon-2',
+    date: '04/03/2017',
+    team1: 'Brive',
+    team2: 'Toulon',
+    score1: 15,
+    score2: 5,
+    bo1: null,
+    bo2: null, 
+  },
   {
     id: 'toulon-lyon-ou-2',
     date: '18/02/2017',
@@ -185,20 +185,19 @@ DATA.loadData = function(cb) {
   });
   */
   POST(webmem + 'run/playerDatas', null, function(err, data) {
-    try {
-      DATA.playerDatas = JSON.parse(data);
-      console.log('couou')
-      for(var playerName in DATA.playerDatas) {
-        DATA.playerDatas[playerName] = JSON.parse(DATA.playerDatas[playerName]);
+      try {
+        DATA.playerDatas = JSON.parse(data);
+        console.log('couou')
+        for(var playerName in DATA.playerDatas) {
+          DATA.playerDatas[playerName] = JSON.parse(DATA.playerDatas[playerName]);
+        }
+        cb();
+      } catch(e) {
+        console.error(e);
       }
-      cb();
-    } catch(e) {
-      console.error(e);
-    }
-  });
-};
-
-DATA.saveData = function(playerName, data, cb) {
+    });
+  };
+  DATA.saveData = function(playerName, data, cb) {
   /*
   if (query.playerName && body) {
     set(query.playerName, body);
