@@ -104,9 +104,19 @@
 }
 .news ul, .news li {
     list-style: none;
+    font-size: 12px;
+}
+.news li:nth-child(odd) {
+    background: #ddd;
 }
 .news a, .news a:hover, .news a:visited {
     color: #777;
+    text-decoration: none;
+}
+.news .date {
+    color: #e9322d;
+    display: inline-block;
+    margin-right: 10px;
 }
 .news {
     display: none;
@@ -333,20 +343,33 @@
 <script src="js/ui.js"></script>
 <script src="js/rss-parser.js"></script>
 <script type="text/javascript">
+function formatDate(date) {
+    if(!date) return '';
+    var d = new Date(date);
+    return dformat = d.getDate() + '/' + (d.getMonth()+1) + '  ' + d.getHours() + ':' + d.getMinutes();
+}
 RSSParser.parseURL('http://www.webmem.io/rss', function(err, parsed) {
     var news = document.getElementById('news');
     var title = document.getElementById('news-title');
     var found = false;
+    var count = 0;
     parsed.feed.entries.forEach(function(entry) {
-        console.log(entry.title + ':' + entry.link);
-        var li = document.createElement('li');
-        var a = document.createElement('a');
-        a.appendChild(document.createTextNode(entry.title));
-        a.setAttribute('href', entry.link);
-        a.setAttribute('target', '_blank');
-        li.appendChild(a);
-        news.appendChild(li);
-        found = true;
+        if (count < 15 ) {
+            console.log(entry.title + ':' + entry.link);
+            var li = document.createElement('li');
+            var a = document.createElement('a');
+            a.appendChild(document.createTextNode(entry.title));
+            a.setAttribute('href', entry.link);
+            a.setAttribute('target', '_blank');
+            var date = document.createElement('span');
+            date.appendChild(document.createTextNode(formatDate(entry.pubDate) + ' '));
+            date.classList.add('date');
+            li.appendChild(date);
+            li.appendChild(a);
+            news.appendChild(li);
+            found = true;
+            count++;            
+        }
     });
     if (found) {        
         news.style.display = 'block';
