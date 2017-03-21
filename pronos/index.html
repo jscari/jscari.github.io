@@ -80,7 +80,7 @@
 .row-with-logo {
     height: 110px;
 }
-.ranking-title {
+.ranking-title, .news-title{
     font-weight: bold;
     font-size: 2em;
     margin-bottom: 0.67em;
@@ -98,6 +98,17 @@
 }
 .ranking-table td {
     text-align: center
+}
+.news ul, .news li {
+    list-style: none;
+}
+.news a, .news a:hover, .news a:visited {
+    color: #777;
+}
+.news {
+    padding: 0;
+    margin-left: 0;
+    margin-bottom: 40px;
 }
 @media (max-width: 600px) {
   .teamlogo {
@@ -157,8 +168,10 @@
             <div id="ranking" v-if="!playerName && games">
                 <!-- ranking -->
                 <div class="content">
+                    <div class="news-title">Dernières infos</div>
+                    <ul class="news" id="news"></ul>
                     <a href="#" class="communist-mode"  v-on:click="communistModeOnOff()" ><img src="img/communism.png"/></a>
-                    <div class="ranking-title">Classement</div class="ranking-title">
+                    <div class="ranking-title">Classement</div>
                     <table class="ranking-table">
                     <thead>
                         <th>Joueur</th>
@@ -315,6 +328,20 @@
 <script src="js/main.js"></script>
 <script src="js/ui.js"></script>
 <script src="js/rss-parser.js"></script>
-
+<script type="text/javascript">
+RSSParser.parseURL('http://www.webmem.io/rss', function(err, parsed) {
+    var news = document.getElementById('news');
+    parsed.feed.entries.forEach(function(entry) {
+        console.log(entry.title + ':' + entry.link);
+        var li = document.createElement('li');
+        var a = document.createElement('a');
+        a.appendChild(document.createTextNode(entry.title));
+        a.setAttribute('href', entry.link);
+        a.setAttribute('target', '_blank');
+        li.appendChild(a);
+        news.appendChild(li);
+  })
+})
+</script>
 </body>
 </html>
