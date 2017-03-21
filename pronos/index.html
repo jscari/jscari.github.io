@@ -99,6 +99,9 @@
 .ranking-table td {
     text-align: center
 }
+#news-title {
+    display: none;
+}
 .news ul, .news li {
     list-style: none;
 }
@@ -106,6 +109,7 @@
     color: #777;
 }
 .news {
+    display: none;
     padding: 0;
     margin-left: 0;
     margin-bottom: 40px;
@@ -168,7 +172,7 @@
             <div id="ranking" v-if="!playerName && games">
                 <!-- ranking -->
                 <div class="content">
-                    <div class="news-title">Dernières infos</div>
+                    <div class="news-title" id="news-title">Dernières infos</div>
                     <ul class="news" id="news"></ul>
                     <a href="#" class="communist-mode"  v-on:click="communistModeOnOff()" ><img src="img/communism.png"/></a>
                     <div class="ranking-title">Classement</div>
@@ -331,6 +335,8 @@
 <script type="text/javascript">
 RSSParser.parseURL('http://www.webmem.io/rss', function(err, parsed) {
     var news = document.getElementById('news');
+    var title = document.getElementById('news-title');
+    var found = false;
     parsed.feed.entries.forEach(function(entry) {
         console.log(entry.title + ':' + entry.link);
         var li = document.createElement('li');
@@ -340,7 +346,12 @@ RSSParser.parseURL('http://www.webmem.io/rss', function(err, parsed) {
         a.setAttribute('target', '_blank');
         li.appendChild(a);
         news.appendChild(li);
-  })
+        found = true;
+    });
+    if (found) {        
+        news.style.display = 'block';
+        title.style.display = 'block';
+    }
 })
 </script>
 </body>
