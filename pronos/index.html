@@ -436,6 +436,13 @@ function similar(s1, s2) {
   var longest = Math.max(s1.length, s2.length)
   return (longest-d)/longest > 0.6;
 }
+function normTitle(title) {
+    return title.toLowerCase()
+    .replace(/rct/g, ' ')
+    .replace(/toulon/g, ' ')
+    .replace(/top 14/g, ' ')
+    .replace(/rugby/g, ' ');
+}
 RSSParser.parseURL('http://www.webmem.io/rss', function(err, parsed) {
     var news = document.getElementById('news');
     var title = document.getElementById('news-title');
@@ -443,7 +450,7 @@ RSSParser.parseURL('http://www.webmem.io/rss', function(err, parsed) {
     var titles = [];
     parsed.feed.entries.forEach(function(entry) {
         var duplicate = false;
-        var tlc = entry.title.toLowerCase();
+        var tlc = normTitle(entry.title);
         for(var i = 0; i < titles.length; i++) {
             if (similar(tlc, titles[i])) {
                 duplicate = true;
@@ -464,7 +471,7 @@ RSSParser.parseURL('http://www.webmem.io/rss', function(err, parsed) {
             li.appendChild(a);
             news.appendChild(li);
             found = true;
-            titles.push(entry.title.toLowerCase());            
+            titles.push(tlc);            
         }
     });
     if (found) {        
