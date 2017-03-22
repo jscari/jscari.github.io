@@ -348,13 +348,109 @@ function formatDate(date) {
     var d = new Date(date);
     return dformat = d.getDate() + '/' + (d.getMonth()+1) + '  ' + d.getHours() + ':' + d.getMinutes();
 }
+function distance (a, b) {
+    var arr = [];
+    var charCodeCache = [];
+    if (a === b) {return 0;
+    }
+
+    var swap = a;
+
+    // Swapping the strings if `a` is longer than `b` so we know which one is the
+    // shortest & which one is the longest
+    if (a.length > b.length) {
+        a = b;
+        b = swap;
+    }
+
+    var aLen = a.length;
+    var bLen = b.length;
+
+    if (aLen === 0) {
+        return bLen;
+    }
+
+    if (bLen === 0) {
+        return aLen;
+    }
+
+    // Performing suffix trimming:
+    // We can linearly drop suffix common to both strings since they
+    // don't increase distance at all
+    // Note: `~-` is the bitwise way to perform a `- 1` operation
+    while (aLen > 0 && (a.charCodeAt(~-aLen) === b.charCodeAt(~-bLen))) {
+        aLen--;
+        bLen--;
+    }
+
+    if (aLen === 0) {
+        return bLen;
+    }
+
+    // Performing prefix trimming
+    // We can linearly drop prefix common to both strings since they
+    // don't increase distance at all
+    var start = 0;
+
+    while (start < aLen && (a.charCodeAt(start) === b.charCodeAt(start))) {
+        start++;
+    }
+
+    aLen -= start;
+    bLen -= start;
+
+    if (aLen === 0) {
+        return bLen;
+    }
+
+    var bCharCode;
+    var ret;
+    var tmp;
+    var tmp2;
+    var i = 0;
+    var j = 0;
+
+    while (i < aLen) {
+        charCodeCache[start + i] = a.charCodeAt(start + i);
+        arr[i] = ++i;
+    }
+
+    while (j < bLen) {
+        bCharCode = b.charCodeAt(start + j);
+        tmp = j++;
+        ret = j;
+
+        for (i = 0; i < aLen; i++) {
+            tmp2 = bCharCode === charCodeCache[start + i] ? tmp : tmp + 1;
+            tmp = arr[i];
+            ret = arr[i] = tmp > ret ? tmp2 > ret ? ret + 1 : tmp2 : tmp2 > tmp ? tmp + 1 : tmp2;
+        }
+    }
+
+    return ret;
+};
+function similar(s1, s2) {
+  if (!s1 || !s2 || !s1.length || !s2.length) return false;
+  if (s1 === s2) return true;
+  var d = distance(s1, s2);
+  var longest = Math.max(s1.length, s2.length)
+  return (longest-d)/longest > 0.6;
+}
 RSSParser.parseURL('http://www.webmem.io/rss', function(err, parsed) {
     var news = document.getElementById('news');
     var title = document.getElementById('news-title');
     var found = false;
-    var count = 0;
+    var titles = [];
     parsed.feed.entries.forEach(function(entry) {
-        if (count < 15 ) {
+        var duplicate = false;
+        var tlc = entry.title.toLowerCase();
+        for(var i = 0; i < titles.length; i++) {
+            if (similar(tlc, titles[i])) {
+                duplicate = true;
+                break;
+            }
+        }
+        if (!duplicate && titles.length < 15 ) {
             console.log(entry.title + ':' + entry.link);
             var li = document.createElement('li');
             var a = document.createElement('a');
@@ -368,7 +464,7 @@ RSSParser.parseURL('http://www.webmem.io/rss', function(err, parsed) {
             li.appendChild(a);
             news.appendChild(li);
             found = true;
-            count++;            
+            titles.push(entry.title.toLowerCase());            
         }
     });
     if (found) {        
