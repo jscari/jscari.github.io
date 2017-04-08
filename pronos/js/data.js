@@ -20,18 +20,8 @@ var POST = function(url, data, cb) {
 DATA.loadData = function(cb) {
   DATA.games = [
   {
-    id: 'sf-toulon-2',
-    date: '25/03/2017',
-    team1: 'Stade Français',
-    team2: 'Toulon',
-    score1: null,
-    score2: null,
-    bo1: null,
-    bo2: null, 
-  },
-  {
     id: 'toulon-toulouse-2',
-    date: '08/04/2017',
+    date: '09/04/2017',
     team1: 'Toulon',
     team2: 'Toulouse',
     score1: null,
@@ -39,8 +29,47 @@ DATA.loadData = function(cb) {
     bo1: null,
     bo2: null, 
   },
-  // terminés    
   {
+    id: 'toulon-castres-2',
+    date: '15/04/2017',
+    team1: 'Toulon',
+    team2: 'Castres',
+    score1: null,
+    score2: null,
+    bo1: null,
+    bo2: null, 
+  },
+  {
+    id: 'bordeaux-begles-toulon-2',
+    date: '29/04/2017',
+    team1: 'Bordeaux-Bègles',
+    team2: 'Toulon',
+    score1: null,
+    score2: null,
+    bo1: null,
+    bo2: null, 
+  },
+  {
+    id: 'toulon-pau-2',
+    date: '06/05/2017',
+    team1: 'Toulon',
+    team2: 'Pau',
+    score1: null,
+    score2: null,
+    bo1: null,
+    bo2: null, 
+  },
+  // terminés  
+  {
+    id: 'sf-toulon-2',
+    date: '26/03/2017',
+    team1: 'Stade Français',
+    team2: 'Toulon',
+    score1: 17,
+    score2: 11,
+    bo1: null,
+    bo2: null, 
+  },{
     id: 'grenoble-toulon-2',
     date: '19/03/2017',
     team1: 'Grenoble',
