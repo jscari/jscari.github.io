@@ -20,12 +20,23 @@ var POST = function(url, data, cb) {
 DATA.loadData = function(cb) {
   DATA.games = [
   {
+    id: 'toulon-castres-br',
+    date: '19/05/2017',
+    team1: 'Castres',
+    team2: 'Toulon',
+    score1: null,
+    score2: null,
+    bo1: null,
+    bo2: null, 
+  },
+  // terminés
+  {
     id: 'bordeaux-begles-toulon-2',
     date: '29/04/2017',
     team1: 'Bordeaux-Bègles',
     team2: 'Toulon',
-    score1: null,
-    score2: null,
+    score1: 13,
+    score2: 26,
     bo1: null,
     bo2: null, 
   },
@@ -34,12 +45,11 @@ DATA.loadData = function(cb) {
     date: '06/05/2017',
     team1: 'Toulon',
     team2: 'Pau',
-    score1: null,
-    score2: null,
+    score1: 32,
+    score2: 12,
     bo1: null,
     bo2: null, 
   },
-  // terminés  
   {
     id: 'toulon-castres-2',
     date: '15/04/2017',
