@@ -1,0 +1,91 @@
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Cadavres Exquis</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.16/vue.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vuex/3.0.1/vuex.min.js"></script>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic">
+  <link rel="stylesheet" href="https://cdn.rawgit.com/necolas/normalize.css/master/normalize.css">
+  <link rel="stylesheet" href="https://cdn.rawgit.com/milligram/milligram/master/dist/milligram.min.css">
+</head>
+
+<body>
+  <h3>Une idée de [Machine]</h3>
+  <div id="root" class="container">
+    <fieldset>
+      <label for="commentField">Lieux (un par ligne)</label>
+      <textarea placeholder="" id="places" :value="places" v-on:blur="updatePlaces"></textarea>
+      <label for="commentField">Armes (une par ligne)</label>
+      <textarea placeholder="" id="weapons" :value="weapons" v-on:blur="updateWeapons"></textarea>
+      <label for="commentField">Temps (un par ligne)</label>
+      <textarea placeholder="" id="times" :value="times" v-on:blur="updateTimes"></textarea>
+      <label for="commentField">Mises en scène (une par ligne)</label>
+      <textarea placeholder="" id="hows" :value="hows" v-on:blur="updateHows"></textarea>
+      <label for="commentField">Signature (une par ligne)</label>
+      <textarea placeholder="" id="signatures" :value="signatures" v-on:blur="updateSignatures"></textarea>
+      <button class="button-primary" @click.stop="random">Générer</button>
+    </fieldset>
+    <blockquote v-show="phrase">
+      <p>
+          <em>{{ phrase }}</em><br/>
+          <em>{{ signature }}</em>
+      </p>
+    </blockquote>
+  </div>
+  <script>
+    let state = {
+      places: ['À Toulon', 'Sur le Machu Picchu' ],
+      weapons: ['avec un couteau', 'avec une flûte de pan'],
+      times: ['le soir', 'au solstice d\'hiver'],
+      hows: ['étendu(e) par terre.', 'assis(s) aux toilettes.'],
+      signatures: ['De rien', 'Miam']
+    };
+    if (localStorage.getItem('state')) {
+      state = JSON.parse(localStorage.getItem('state'))
+    }
+    const store = new Vuex.Store({
+      state: state,
+      mutations: {
+        addPlace(state, place) { state.places.push(place); },
+        updatePlaces(state, places) { state.places = places.split('\n'); localStorage.setItem('state', JSON.stringify(state)); },
+        addWeapon(state, weapon) { state.weapons.push(weapon); localStorage.setItem('state', JSON.stringify(state)); },
+        updateWeapons(state, weapons) { state.weapons = weapons.split('\n'); localStorage.setItem('state', JSON.stringify(state)); },
+        addTime(state, time) { state.times.push(time); localStorage.setItem('state', JSON.stringify(state)); },
+        updateTimes(state, times) { state.times = times.split('\n'); localStorage.setItem('state', JSON.stringify(state)); },
+        addHow(state, how) { state.hows.push(how); localStorage.setItem('state', JSON.stringify(state)); },
+        updateHows(state, hows) { state.hows = hows.split('\n'); localStorage.setItem('state', JSON.stringify(state)); },
+        addSignature(state, signature) { state.signatures.push(signature); localStorage.setItem('state', JSON.stringify(state)); },
+        updateSignatures(state, signatures) { state.signatures = signatures.split('\n'); localStorage.setItem('state', JSON.stringify(state)); },
+      }
+    });
+    new Vue({
+      el: '#root',
+      data: { phrase: '', signature: '' },
+      computed: {
+        places() { return store.state.places.join('\n') },
+        weapons() { return store.state.weapons.join('\n') },
+        times() { return store.state.times.join('\n') },
+        hows() { return store.state.hows.join('\n') },
+        signatures() { return store.state.signatures.join('\n') },
+      },
+      methods: {
+        updatePlaces(e) { store.commit('updatePlaces', e.target.value) },
+        updateWeapons(e) { store.commit('updateWeapons', e.target.value) },
+        updateTimes(e) { store.commit('updateTimes', e.target.value) },
+        updateHows(e) { store.commit('updateHows', e.target.value) },
+        updateSignatures(e) { store.commit('updateSignatures', e.target.value) },
+        random() {
+          this.phrase =
+            store.state.places[Math.floor(Math.random() * store.state.places.length)] + ' ' +
+            store.state.weapons[Math.floor(Math.random() * store.state.weapons.length)] + ' ' +
+            store.state.times[Math.floor(Math.random() * store.state.times.length)] + ' ' +
+            store.state.hows[Math.floor(Math.random() * store.state.hows.length)];
+          this.signature = store.state.signatures[Math.floor(Math.random() * store.state.signatures.length)];
+        }
+      }
+    });
+  </script>
+</body>
+
+</html>
