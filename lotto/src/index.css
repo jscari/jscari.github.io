@@ -17,6 +17,9 @@ body {
 	font-size: 22px;
 	text-align: center;
 }
+.lastBall {
+	background: radial-gradient(circle at 15px 15px, #ead6ca, #000);
+}
 #ballpark {
 	margin: 0% 5%;
 	padding-bottom: 150px;
@@ -24,7 +27,7 @@ body {
 }
 .ball:first-child { 
 	display: block;
-    width: 80px;
+  width: 80px;
 	height: 80px;
 	line-height: 80px;
 	border-radius: 80px;
