@@ -54,6 +54,9 @@ body {
 	background: white;
 	border-top: 1px solid grey;
 }
+#bottom button {
+  margin-top: 20px;
+}
 .midnight-blue-flat-button {
     position: relative;
     vertical-align: top;
