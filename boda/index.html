@@ -2,7 +2,23 @@
   <head>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">  </head>
-  <style>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Sulphur+Point:wght@300&display=swap" rel="stylesheet">
+<style>
+  .novios {
+    font-family: 'Dancing Script', cursive;
+    font-size: 80px;
+  }
+  .fecha {
+    font-size: 30px;
+    font-weight: 400;
+  }
+  .noscasamos {
+    font-weight: 400;
+  }
     .masthead {
     height: 80vh;
     min-height: 200px;
@@ -11,13 +27,71 @@
     background-position: center;
     background-repeat: no-repeat;
 }
+.lead {
+  font-family: 'Sulphur Point', sans-serif;
+    font-size: 25px;
+}
+.CTA {
+  border-radius: 4px;
+  background: linear-gradient(to right, #67b26b, #4ca2cb) !important;
+  border: none;
+  color: #FFFFFF;
+  text-align: center;
+  font-size: 22px;
+  padding: 20px;
+  width: 200px;
+  transition: all 0.4s;
+  cursor: pointer;
+  margin: 5px;
+}
+
+.CTA span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.4s;
+}
+.CTA span:after {
+  content: '\00bb';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+
+.CTA:hover span {
+  padding-right: 25px;
+}
+.dato-title {
+  margin-top: 30px;
+  font-size: 20px;
+  font-weight: bolder;
+}
+.hotel {margin-bottom: 30px;}
+.hotel-title {
+  font-weight: bold;
+}
+.hotel img {
+  width: 300px;
+  display: inline-block;
+  margin-right: 10px;
+}
+footer {
+  width: 90%;
+  margin: auto;
+}
+footer a{
+  color: grey;
+  text-decoration: none;
+}
   </style>
     <body>
     
 <!-- Navigation -->
 <nav class="navbar navbar-expand-lg navbar-light bg-light shadow fixed-top">
   <div class="container">
-    <a class="navbar-brand" href="#">Boda en Cantas</a>
+    <a class="navbar-brand" href="#">Boda de Sofía y Jean Sebastien</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive"
       aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -46,8 +120,16 @@
   <div class="container h-100">
     <div class="row h-100 align-items-center">
       <div class="col-12 text-center">
-        <h1 class="fw-light">Boda en Cantas el sábado 03/10/2022</h1>
-        <p class="lead">Bienvenid@ a la boda de Sofía y Jean-Sébastien</p>
+        <h1 class="noscasamos">¡NOS CASAMOS!</h1>
+        <h1 class="novios">Sofía y Jean Sebastien </h1>
+        <p class="lead">
+ 
+Nos sentimos muy felices y junto a nuestras familias queremos compartir con ustedes el dia de nuestra unión</p>
+
+        <h1 class="fecha">03 de Septiembre  del 2022</h1>        
+<br/>
+      <a class="CTA" href="https://forms.gle/1V9oRhuos5ZrQG5T9" target="_blank" rel="nofollow"><span>Confirmo mi presencia</span></a>
+
       </div>
     </div>
   </div>
@@ -56,20 +138,22 @@
 <!-- Page Content -->
 <section class="py-5" id="when">
   <div class="container">
-    <h2 class="fw-light">Cuando</h2>
-    <p>El 3 de Septiembre 2022</p>
-    <h4>Agenda del dia</h4>
-    <p>Aconsejamos llegar en el la manana en Corire. Almorzar ligero, alistarse ahi y luego llegar a Cantas para el matrimonio. </p>
-    <p>Aqui un borrador del programa, lo completaremos con mas detallas cuando todo estara listo.</p>
-    <ul><li>2pm: Matrimonio en la iglesia de Cantas</li>
-      <li>4pm: Cena</li>
+    <h2>Agenda del dia</h2>
+    <p>Llegar en la mañana a Corire. Almorzar ligero, alistarse ahí y llegar a Cantas para el matrimonio.</p>
+Programa
+<ul>
+<li>2pm: Ceremonia religiosa (iglesia de Cantas)</li>
+<li>3pm: Recepción en local (Festival Criollo)</li>
+<li>5pm: Hora del banquete</li>
+<li>6pm: Fiesta.</li>
+   
     </ul>
   </div>
 </section>
 <section class="py-5" id="where">
   <div class="container">
     <h2 class="fw-light">Cantas</h2>
-    <p>La iglesia y la cena estarán ubicados en el pueblo de Cantas, en el valle de Majes.</p>
+    <p>La iglesia y el local estarán ubicados en el pueblo de Cantas, en el valle de Majes.</p>
     <p>
       <iframe
         src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d799.710030821623!2d-72.4534597080748!3d-16.231693985297582!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e1!3m2!1sfr!2spe!4v1655173770895!5m2!1sfr!2spe"
@@ -81,40 +165,92 @@
       src="https://www.google.com/maps/embed?pb=!1m26!1m12!1m3!1d480337.5414051399!2d-72.20621240784317!3d-16.278444030410007!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m11!3e0!4m5!1s0x91424a487785b9b3%3A0xa3c4a612b9942036!2sArequipa!3m2!1d-16.4090474!2d-71.53745099999999!4m3!3m2!1d-16.2314844!2d-72.4535728!5e1!3m2!1sfr!2spe!4v1655173957097!5m2!1sfr!2spe"
       width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
       referrerpolicy="no-referrer-when-downgrade"></iframe>
-      <br /><br />
-      <h4>Actividades</h4>
-      <p>La region es famosa por:</p>
-      <ul>
-        <li>Su clima (desfrutan del rio, de los arboles frutales y del aire puro)</li>
-        <li>Su chupe de camaron (varios restaurantes en Corire, cerca del rio)</li>
-        <li>Sus vinos y sus piscos (no se puede visitar las bodegas pero pueden comprar)</li>
-        <li>Su <a href="https://www.tripadvisor.com.pe/Attraction_Review-g13229239-d4340478-Reviews-Petroglifos_de_Toro_Muerto-La_Candelaria_Arequipa_Region.html">petroglifos</a> (dibujos en rocas, cuidado mucho sol)</li>
-        <li>Su <a href="https://www.tripadvisor.com.pe/Attraction_Review-g294313-d10407004-Reviews-Parque_Jurasico_de_Querulpa-Arequipa_Arequipa_Region.html">dinosaurio</a> (una huella arriba de un cerro) </a></li>
-      </ul>
   </div>
-</section><section class="py-5" id="theme">
+
+</section>
+    <section class="py-5" id="theme">
   <div class="container">
     <h2 class="fw-light">El tema</h2>
     <p>Rustico</p>
-    <p>Estaremos en la naturaleza, habrá un poco de tierra.</p>
+    <p>Estaremos en la naturaleza, habrá un poco de viento.</p>
     <p>Vengan guapitos y comodos.</p>
     <br />
     <img
       src="https://cdn0.matrimonio.com.co/article-gallery-o/00000/3_2/960/jpg/articulos-a-fotos/decoracion/mesa-desnuda-rustica.jpeg">
   </div>
 </section>
-<section class="py-5" id="theme">
+<section class="py-5" id="data">
   <div class="container">
-    <h2 class="fw-light">Datos</h2>
-    <p>Une datos utiles</p>
-    <p>Taxis: 10 soles la carera entre Corire y Cantas</p>
-    <p>Hoteles: (muy pronto)</p>
-    <p>Minivan: Salen del terminal terrestre y cuesta approx 20 soles. Ojo vamos a a</p>
-    <br />
-    <img
-      src="https://cdn0.matrimonio.com.co/article-gallery-o/00000/3_2/960/jpg/articulos-a-fotos/decoracion/mesa-desnuda-rustica.jpeg">
-  </div>
+    <h2 class="fw-light">Datos utiles</h2>
+
+    <p class="dato-title">Como llegar a Cantas</p>
+    <div>Primero llegar a Corire y luego tomar un taxi hasta Cantas.</div>
+    <p class="dato-title">Como llegar a Corire</p>
+    <div><b>Option 1:</b> Mini Van Arequipa->Corire (20 soles)</div>
+    <div>Entren al terminal de las minivans para comprar su pasaje.</div>
+     <div>La minivan va hasta a Aplao, hay que bajar en la plaza de Corire.</div>
+   <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d808.0022308907454!2d-71.54240713300788!3d-16.42272112428289!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x91424ae958d96397%3A0x8f3a50c391f07b2e!2sParadero%20Minivans%20a%20Caman%C3%A1%20y%20pedregal!5e0!3m2!1sfr!2spe!4v1658108271748!5m2!1sfr!2spe" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+   <br/> 
+   <div><b>Option 2:</b> Bus Arequipa->Corire (15 soles)</div>
+    <div>La empresa es Carpio, se encuentra en el terrapuerto de Arequipa.</div>
+    <div>Es un poco mas lento que la minivan.</div>
+    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1438.3630158817032!2d-71.54486180942469!3d-16.423949836467447!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x91424aeb95cb3be1%3A0x362ceaa0b20a26e5!2sTerminal%20Terrestre%20de%20Arequipa!5e0!3m2!1sfr!2spe!4v1658108395640!5m2!1sfr!2spe" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    
+    <p class="dato-title">Como regresar a Arequipa</p>
+    <div>Todas las opciones salen de la plaza de Corire.</div>
+    <div><b>Option 1:</b> Mini Van Corire -> Arequipa (20 soles)</div>
+    <div><b>Option 2:</b> Bus Carpio Corire -> Arequipa (15 soles)</div>
+    <p class="dato-title">Taxis Corire<->Cantas</p>
+      <div>Approx. 10 soles la carera entre Corire y Cantas.</div>
+      <div>Salen de la plaza de Corire (a la izquierda del camaron).</div>
+      <div>Hay que llamarlos para que te regojan desde Cantas.</div>
+      <div>☎ Alejandro: <a href="tel:983848297">983848297</a></div>
+      <div>☎ Elvis: <a href="tel:982379257">982379257</a></div>
+      <div>☎ Jonatan: <a href="tel:942493206">942493206</a></div>
+      <div>☎ Yamil: <a href="tel:965170285">965170285</a></div>
+      <div>☎ Simón: <a href="tel:959433985">959433985</a></div>
+    </p>
+    <p class="dato-title">Hoteles</p>
+    <div class="hotel">
+      <div class="hotel-title">Hotel Willys</div>
+      <div class="hotel-phone">☎  <a href="tel:959476622">959476622</a></div>
+      <div class="hotel-price">Simple: 40-50 soles</div>
+      <div class="hotel-price">Doble/Matrimonial: 60-70 soles</div>
+      <div class="hotel-price">Triple: 70-80 soles</div>
+      <img src="/boda/img/willys.jpg" />
+      <img src="/boda/img/willys2.jpg" />
+    </div>
+  <div class="hotel">
+      <div class="hotel-title">Hotel El Molino</div>
+      <div class="hotel-phone">☎ <a href="tel:996966647">996966647</a></div>
+      <div class="hotel-price">Simple: 40 soles</div>
+      <div class="hotel-price">Matrimonial: 80 soles</div>
+      <div class="hotel-price">Triple: 100 soles</div>
+      <img src="/boda/img/molino.jpg" />
+      <img src="/boda/img/molino2.jpg" />
+    </div>
+<div class="hotel">
+      <div class="hotel-title">Hotel El Aire Libre</div>
+      <div class="hotel-price">Pueden acampar en el pueblo de Cantas.</div>
+      <img src="/boda/img/airelibre.jpg" />
+    </div>
+    <p class="dato-title">Actividades</p>
+      <p>La region es famosa por:</p>
+      <ul>
+        <li>Su clima (desfrutan del rio, de los arboles frutales y del aire puro)</li>
+        <li>Su chupe de camaron (varios restaurantes en Corire, cerca del rio)</li>
+        <li>Su vino y su pisco (no se puede visitar las bodegas pero pueden comprar)</li>
+        <li>Su <a href="https://www.tripadvisor.com.pe/Attraction_Review-g13229239-d4340478-Reviews-Petroglifos_de_Toro_Muerto-La_Candelaria_Arequipa_Region.html">petroglifos</a> (dibujos en rocas, cuidado mucho sol)</li>
+        <li>Su <a href="https://www.tripadvisor.com.pe/Attraction_Review-g294313-d10407004-Reviews-Parque_Jurasico_de_Querulpa-Arequipa_Arequipa_Region.html">dinosaurio</a> (una huella arriba de un cerro) </a></li>
+      </ul>
+     </div>
 </section>
+ <section>
+  <div class="col-12 text-center"> <a class="CTA" href="https://forms.gle/1V9oRhuos5ZrQG5T9" target="_blank" rel="nofollow"><span>Confirmo mi presencia</span></a></div>
+  </section>
+  <footer><br/><br/>
+  
+  <a target="_blank" href="https://docs.google.com/spreadsheets/d/1q1ACd1O2XSrhapJv9mLzxD-tAZIfOv7tHUQ9jo7y9RI/edit#gid=0">Invitados(privado)</a></a></footer>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
   integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
 </body>
