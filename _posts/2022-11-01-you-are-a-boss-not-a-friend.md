@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "A post test"
+title: "Your are a boss not a friend"
 date: 2022-11-01
 ---
 
