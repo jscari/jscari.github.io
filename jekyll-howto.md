@@ -9,4 +9,13 @@ source ~/.bashrc
 sudo gem install jekyll
 sudo gem install  bundler
 # live preview
-jekyll serve --livereloadjekyll serve --livereload
+source ~/.bashrc
+bundle exec jekyll serve --livereload
+
+
+##help
+Could not find gem 'github-pages (~> 227)' in locally installed gems.
+=> gem install github-pages
+
+bundler: failed to load command
+=> bundle add webrick
