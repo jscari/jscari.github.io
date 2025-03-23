@@ -1,6 +1,7 @@
+var assetsPath = '/mikamur/assets';
 var introState = {
    preload: function() { 
-    game.load.image('intro', 'assets/intro.png');    
+    game.load.image('intro', `${assetsPath}/intro.png`);    
   },
   create: function() {
   // splash intro
@@ -18,10 +19,10 @@ var introState = {
 var mainState = {
   preload: function() { 
     // Load the mika sprite
-    game.load.image('mika', 'assets/mika.png');
-    game.load.image('wall', 'assets/pipe.png');
-    game.load.image('hair', 'assets/hair.png');
-    game.load.image('intro', 'assets/intro.png');    
+    game.load.image('mika', `${assetsPath}/mika.png`);
+    game.load.image('wall', `${assetsPath}/pipe.png`);
+    game.load.image('hair', `${assetsPath}/hair.png`);
+    game.load.image('intro', `${assetsPath}/intro.png`);    
   },
 create: function() {
     // Change the background color of the game to blue
@@ -131,7 +132,7 @@ restartGame: function() {
 
 var scoreState = {
    preload: function() { 
-    game.load.image('score', 'assets/score.png');    
+    game.load.image('score', `${assetsPath}/score.png`);    
   },
   create: function() {
   // splash intro

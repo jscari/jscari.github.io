@@ -1,0 +1,7 @@
+name: Jean-Sébastien Carinos
+markdown: kramdown
+domain: jscari.github.io
+url: https://jscari.github.io
+#baseurl: /REPOSITORY-NAME/
+exclude:
+  ["boda", "mikamur", "pronos", "pronosV1", "cadavres-exquis", "lotto", "pico8"]

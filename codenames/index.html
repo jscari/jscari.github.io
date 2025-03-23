@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Codenames</title>
+    <script src="codenames/cards.js"></script>
+    <script>
+        window.onload = function () {
+            fixCanvasSize();
+        };
+        window.onresize = function () {
+            fixCanvasSize();
+        };
+        /* Pseudo rng */
+        function splitmix32(a) {
+            return function () {
+                a |= 0;
+                a = a + 0x9e3779b9 | 0;
+                let t = a ^ a >>> 16;
+                t = Math.imul(t, 0x21f0aaad);
+                t = t ^ t >>> 15;
+                t = Math.imul(t, 0x735a2d97);
+                return ((t = t ^ t >>> 15) >>> 0) / 4294967296;
+            }
+        }
+        function getRandomNumber(seed, maxValue) {
+            let sum = 0;
+            for (let i = 0; i < seed.length; i++) {
+                sum += seed.charCodeAt(i);
+            }
+            const rand = splitmix32(sum)()
+            return Math.floor(rand * maxValue);
+        }
+        function onChange() {
+            const seed = document.getElementById("seed").value;
+            const player = document.querySelector('input[name="player"]:checked').value;
+            const playerIndex = player === "player1" ? 0 : 1;
+            const grid = grids[getRandomNumber(seed, grids.length)];
+            const playerGrid = grid.slice(playerIndex * 25, playerIndex * 25 + 25);
+            console.log(playerGrid);
+            drawCard(playerGrid);
+        }
+        function fixCanvasSize() {
+            const canvas = document.getElementById("card");
+            const rect = {
+                width: window.innerWidth,
+                height: window.innerHeight
+            };
+            if (rect.width > rect.height) {
+                const maxHeight = rect.height * 0.7;
+                const maxWidth = maxHeight * 4 / 3;
+                const height = maxHeight;
+                const width = maxWidth;
+                canvas.width = width;
+                canvas.height = height;
+            } else {
+                const maxWidth = rect.width * 0.9;
+                const maxHeight = maxWidth * 3 / 4;
+                const height = maxHeight;
+                const width = maxWidth;
+                canvas.width = width;
+                canvas.height = height;
+
+            }
+
+            console.log(canvas.width, canvas.height);
+        }
+        function drawCard(playerGrid) {
+            const canvas = document.getElementById("card");
+            const ctx = canvas.getContext("2d");
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            const itemsPerRow = Math.sqrt(playerGrid.length);
+            const lineWidth = 2;
+            const squareWidth = (canvas.width - 0 * (itemsPerRow + 1)) / itemsPerRow;
+            const squareHeight = (canvas.height - 0 * (itemsPerRow + 1)) / itemsPerRow;
+            for (let i = 0; i < playerGrid.length; i++) {
+                const x = i % itemsPerRow;
+                const y = Math.floor(i / itemsPerRow);
+                const card = playerGrid[i];
+                console.log(card);
+                ctx.fillStyle = card === 0 ? "#f5deb3" : card === 1 ? "#00ff00" : "black";
+                ctx.strokeStyle = "#222";
+                ctx.lineWidth = lineWidth;
+                ctx.fillRect(x * squareWidth, y * squareHeight, squareWidth, squareHeight);
+                ctx.strokeRect(x * squareWidth, y * squareHeight, squareWidth, squareHeight);
+            }
+
+
+        }
+    </script>
+</head>
+
+<body>
+    <h1>Codenames Duet - Code Card Generator</h1>
+    <div style="display: flex; flex-direction: column; align-items: center;">
+        <form id="playerForm" onchange="onChange()" style="text-align: center;">
+            <label for="seed">The 2 players must enter the same word:</label>
+            <input type="text" id="seed" name="seed" onkeydown="onChange()">
+            <br>
+            <label>
+                <input type="radio" name="player" value="player1"> Player 1
+            </label>
+            <label>
+                <input type="radio" name="player" value="player2"> Player 2
+            </label>
+        </form>
+        <canvas id="card" style="border: 5px solid black; border-radius: 15px; margin-top: 20px;"></canvas>
+    </div>
+</body>
+
+</html>
