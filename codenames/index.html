@@ -10,9 +10,6 @@
         window.onload = function () {
             fixCanvasSize();
         };
-        window.onresize = function () {
-            fixCanvasSize();
-        };
         /* Pseudo rng */
         function splitmix32(a) {
             return function () {
@@ -39,7 +36,6 @@
             const playerIndex = player === "player1" ? 0 : 1;
             const grid = grids[getRandomNumber(seed, grids.length)];
             const playerGrid = grid.slice(playerIndex * 25, playerIndex * 25 + 25);
-            console.log(playerGrid);
             drawCard(playerGrid);
         }
         function fixCanvasSize() {
