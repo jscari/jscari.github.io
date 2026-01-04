@@ -1,0 +1,1 @@
+/Users/js/repositories/jscari.github.io/blog/input/src/2025-06-18-hello-world.md|2025-06-18-hello-world.md|A leader is a giver|2025-06-18 17:14:51 +0200|2025-06-18 17:14:51 +0200||hello-world|||TLDR|JS Carinos|anonymous@example.com
