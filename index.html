@@ -1,297 +1,358 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jean-Sébastien Carinos | Conseiller Technique</title>
-    <style>
-        :root {
-            --bg-color: #ffffff;
-            --text-main: #111111;
-            --text-muted: #666666;
-            --border-color: #eaeaea;
-            --spacing-unit: 1.5rem;
-            --container-width: 720px;
-        }
+<html lang="en">
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+    <head>
+        <title>Carinos Jean-Sébastien - Conseiller Technique</title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width,initial-scale=1" />
+        
+        <meta name="color-scheme" content="dark" />
+        <meta name="description" content="Conseiller Technique à la demande. J'accompagne les dirigeants d'entreprises et d'associations dans leurs choix technologiques et la structuration de leurs équipes." />
+        <link
+            href="https://fonts.googleapis.com/css2?display=swap&family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900"
+            rel="stylesheet" type="text/css" />
+        <style>
+/* CSS Reset */
+            html,
+            body,
+            div,
+            span,
+            applet,
+            object,
+            iframe,
+            h1,
+            h2,
+            h3,
+            h4,
+            h5,
+            h6,
+            p,
+            blockquote,
+            pre,
+            a,
+            abbr,
+            acronym,
+            address,
+            big,
+            cite,
+            code,
+            del,
+            dfn,
+            em,
+            img,
+            ins,
+            kbd,
+            q,
+            s,
+            samp,
+            small,
+            strike,
+            strong,
+            sub,
+            sup,
+            tt,
+            var,
+            b,
+            u,
+            i,
+            center,
+            dl,
+            dt,
+            dd,
+            ol,
+            ul,
+            li,
+            fieldset,
+            form,
+            label,
+            legend,
+            table,
+            caption,
+            tbody,
+            tfoot,
+            thead,
+            tr,
+            th,
+            td,
+            article,
+            aside,
+            canvas,
+            details,
+            embed,
+            figure,
+            figcaption,
+            footer,
+            header,
+            hgroup,
+            menu,
+            nav,
+            output,
+            ruby,
+            section,
+            summary,
+            time,
+            mark,
+            audio,
+            main,
+            hr {
+                margin: 0;
+                padding: 0;
+                border: 0;
+                font: inherit;
+                vertical-align: baseline;
+            }
+body {
+                line-height: 1.5;
+                min-height: 100vh;
+                background-color: #000;
+                color: #fff;
+                font-family: 'Merriweather', serif;
+            }
+            ul,
+            ol {
+                list-style: none;
+            }
+            img {
+                display: block;
+                max-width: 100%;
+            }
+            button {
+                font-family: inherit;
+            }
 
-        body {
-            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-            line-height: 1.7;
-            color: var(--text-main);
-            background-color: var(--bg-color);
-            -webkit-font-smoothing: antialiased;
-        }
+            /* Base Typography */
+            h1, h2, h3, p {
+                line-height: 1.7;
+            }
+            h1 {
+                font-size: 2.625em;
+                font-weight: 900;
+                line-height: 1.25;
+                color: #FFFFFF;
+                margin-bottom: 1rem;
+            }
+            h2 {
+                font-size: 0.75em;
+                font-weight: 700;
+                line-height: 1.875;
+                color: #FFFFFF;
+                margin-bottom: 1.5rem;
+                text-transform: uppercase;
+            }
+            p {
+                font-size: 0.75em;
+                font-weight: 300;
+                line-height: 1.875;
+                color: #FFFFFF;
+            }
+            p.subheading {
+                font-size: 1em;
+                margin-bottom: 2rem;
+            }
+            p + p {
+                margin-top: 1rem;
+            }
+            a {
+                color: inherit;
+                text-decoration: underline;
+            }
+            a:hover {
+                color: #BDBDBD;
+            }
 
-        /* Layout */
-        .container {
-            max-width: var(--container-width);
-            margin: 0 auto;
-            padding: 0 var(--spacing-unit);
-        }
+            /* Layout */
+            .page-container {
+                display: flex;
+                flex-direction: row-reverse; /* Image on the right */
+            }
+            .content-pane {
+                width: 44rem;
+                max-width: 100%;
+                flex-shrink: 0;
+                padding: 3rem 3.5rem;
+            }
+            .image-pane {
+                flex-grow: 1;
+                background-image: url('./assets/avatar.2026.jpg');
+                background-position: center;
+                background-size: cover;
+                position: sticky;
+                top: 0;
+                height: 100vh;
+            }
+            section {
+                padding: 1.5rem 0;
+            }
 
-        header {
-            padding: 1.5rem 0;
-            margin-bottom: 1rem;
-        }
+            /* Components */
+            .button {
+                appearance: none;
+                transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+                background-color: transparent;
+                border: solid 1px #FFFFFF;
+                border-radius: 0;
+                color: #FFFFFF;
+                cursor: pointer;
+                display: inline-block;
+                font-family: 'Merriweather', serif;
+                font-size: 0.8rem;
+                font-weight: 700;
+                height: 3.5rem;
+                letter-spacing: 0.1rem;
+                line-height: 3.5rem;
+                padding: 0 2rem;
+                text-align: center;
+                text-decoration: none;
+                text-transform: uppercase;
+                white-space: nowrap;
+                margin-top: 1.5rem;
+            }
+            .button:hover {
+                background-color: #FFFFFF;
+                color: #000000;
+            }
 
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: baseline;
-        }
+            .services-list {
+                display: flex;
+                flex-direction: column;
+                width: 100%;
+                margin-top: 2rem;
+            }
+            .service-item {
+                display: grid;
+                grid-template-columns: 1fr 2fr;
+                gap: 2rem;
+                padding: 1.5rem 0;
+                border-top: 1px solid rgba(255, 255, 255, 0.2);
+            }
+            .service-item:last-child {
+                border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            }
+            .service-item h3 {
+                font-size: 0.75em;
+                font-weight: 700;
+                line-height: 1.875;
+                color: #FFFFFF;
+            }
 
-        .brand {
-            font-weight: 700;
-            font-size: 1rem;
-            color: var(--text-main);
-            text-decoration: none;
-            letter-spacing: -0.02em;
-        }
-
-        .nav-links a {
-            margin-left: 1.5rem;
-            text-decoration: none;
-            color: var(--text-muted);
-            font-size: 0.9rem;
-            transition: color 0.3s;
-        }
-
-        .nav-links a:hover {
-            color: var(--text-main);
-        }
-
-        /* Hero Section */
-        .hero {
-            padding: 1rem 0 1rem;
-        }
-
-        .hero h1 {
-            font-size: 2.25rem;
-            font-weight: 600;
-            color: var(--text-main);
-            margin-bottom: 1.5rem;
-            line-height: 1.1;
-            letter-spacing: -0.03em;
-        }
-
-        .hero p {
-            font-size: 1.125rem;
-            color: var(--text-muted);
-            max-width: 100%;
-            margin-bottom: 2rem;
-        }
-
-        .profile-img {
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            object-fit: cover;
-            float: left;
-            margin-right: 1.5rem;
-            margin-bottom: 0.5rem;
-        }
-
-        /* Sections */
-        section {
-            padding: 2rem 0;
-        }
-
-        section h2 {
-            font-size: 0.85rem;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            color: var(--text-muted);
-            margin-bottom: 2rem;
-            font-weight: 600;
-        }
-
-        /* Services List */
-        .services-list {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .service-item {
-            padding: 1.5rem 0;
-            border-top: 1px solid var(--border-color);
-            display: grid;
-            grid-template-columns: 1fr 2fr;
-            gap: 2rem;
-        }
-
-        .service-item:last-child {
-            border-bottom: 1px solid var(--border-color);
-        }
-
-        .service-item h3 {
-            font-size: 1rem;
-            font-weight: 600;
-            color: var(--text-main);
-        }
-
-        .service-item p {
-            font-size: 0.95rem;
-            color: var(--text-muted);
-            margin: 0;
-        }
-
-        /* Contact */
-        .cta-button {
-            display: inline-block;
-            background-color: transparent;
-            color: var(--text-main);
-            padding: 1rem 2rem;
-            border: 1px solid var(--text-main);
-            text-decoration: none;
-            font-weight: 500;
-            transition: all 0.2s;
-            cursor: pointer;
-            font-size: 1rem;
-            margin-top: 1rem;
-        }
-
-        .cta-button:hover {
-            background-color: var(--text-main);
-            color: var(--bg-color);
-        }
-
-        footer {
-            padding: 2rem 0;
+            /* Footer */
+            footer,
             margin-top: 2rem;
-            color: var(--text-muted);
-            font-size: 0.875rem;
-        }
+                padding-top: 2rem;
+                border-top: 1px solid rgba(255, 255, 255, 0.2);
+            }
+            footer p {
+                font-size: 0.625em;
+            }
 
-        @media (max-width: 600px) {
-            .hero h1 { font-size: 1.75rem; }
-            .nav-links { display: none; } /* Simplify for mobile */
-            .service-item { grid-template-columns: 1fr; gap: 0.5rem; }
-        }
-    </style>
-</head>
-<body>
-
-    <header>
-        <div class="container">
-            <nav>
-                <a href="#" class="brand">Jean-Sébastien Carinos</a>
-                <div class="nav-links">
-                    <a href="#about">À propos</a>
-                    <a href="#services">Services</a>
-                    <a href="#contact">Contact</a>
-                </div>
-            </nav>
+            /* Responsive */
+            @media (max-width: 980px) {
+                html { font-size: 11pt; }
+                .page-container { flex-direction: column; }
+                .content-pane { width: 100%; padding: 3rem 2rem; }
+                .image-pane { order: -1; height: 45vh; position: relative; }
+            }
+            @media (max-width: 736px) {
+                .service-item { grid-template-columns: 1fr; gap: 0.5rem; }
+            }
+        </style>
+    </head>
+    <body>
+        <div class="page-container">
+            <aside class="image-pane"></aside>
+            <main class="content-pane">
+                <header>
+                    <h1>Carinos Jean-Sébastien</h1>
+                        <h2>Conseiller Technique à la demande</h2>
+                    <p class="subheading">J'accompagne les dirigeants d'entreprises et d'associations dans leurs choix technologiques et la structuration de leurs équipes.</p>
+                </header>
+    
+                <section id="about-section">
+                    <h2>À propos</h2>
+                    <p>Ancien manager et directeur technique, dans des petites et grandes structures,</p>
+                    <p>je cherche aujourd'hui à aider les acteurs de demain, en accompagnant leurs projets à se concrétiser techniquement de la meilleure des manières.</p>
+                    <p>Je ne suis pas un développeur ou une agence mais plutôt un conseiller technique 'à la demande' qui vous aidera à mieux comprendre les enjeux, éviter les pièges et prendre les meilleurs décisions.</p>
+                </section>
+    
+                <section id="services-section">
+                    <h2>Services</h2>
+                    <div class="services-list">
+                        <div class="service-item">
+                            <h3>Consulting Gratuit</h3>
+                            <p>Tout commence par un premier appel d'une heure, totalement gratuit. Vous me parlez de votre projet, et je vous donne mes premiers conseils stratégiques, sans engagement.</p>
+                        </div>
+                        <div class="service-item">
+                            <h3>Direction Technique</h3>
+                            <p>Aide à la structuration des équipes, choix des technologies (stack), planification de roadmap et audit de l'existant.</p>
+                        </div>
+                        <div class="service-item">
+                            <h3>Recrutement & Organisation</h3>
+                            <p>Support dans le recrutement de profils techniques clés et mise en place de processus de développement efficaces.</p>
+                        </div>
+                        <div class="service-item">
+                            <h3>Mentoring</h3>
+                            <p>Échanges et confrontation de points de vue avec vos directeurs techniques actuels pour challenger les décisions et apporter un regard extérieur.</p>
+                        </div>
+                    </div>
+                </section>
+    
+                <section id="contact-section">
+                    <h2>Contact</h2>
+                    <p>Quelque soit sa taile, votre projet mérite un accompagnement et une expertise technique solides.</p>
+                    <button class="button" onclick="copyEmail()">Copier mon adresse Email</button>
+                    <p id="feedback" style="opacity: 0; transition: opacity 0.3s; margin-top: 1rem;">Email copié !</p>
+                </section>
+    
+                <footer>
+                    <p>&copy; <script>document.write(new Date().getFullYear())</script> Jean-Sébastien Carinos. Tous droits réservés.</p>
+                </footer>
+            </main>
         </div>
-    </header>
-
-    <main>
-        <section class="hero">
-            <div class="container">
-                <h1>Conseiller Technique <br>à la demande</h1>
-                <p>J'accompagne les dirigeants d'entreprises et d'associations dans leurs choix technologiques et la structuration de leurs équipes.</p>
-            </div>
-        </section>
-
-        <section id="about">
-            <div class="container">
-                <h2>À propos</h2>
-                <img src="./assets/avatar.2026.jpg" alt="Jean-Sébastien Carinos" class="profile-img">
-                
-                <p>Ancien manager et directeur technique, dans des petites et grandes structures,</p>
-                <p>je cherche aujourd'hui à aider les acteurs de demain, en accompagnant leurs projets à se concrétiser techniquement de la meilleure des manières.</p>
-                <p>Je ne suis pas un développeur ou une agence mais plutôt un conseiller technique 'à la demande' qui vous aidera à mieux comprendre les enjeux, éviter les pièges et prendre les meilleurs décisions.</p>
-  </div>
-        </section>
-
-        <section id="services">
-            <div class="container">
-                <h2>Services</h2>
-                <div class="services-list">
-                    <div class="service-item">
-                        <h3>Consulting Gratuit</h3>
-                        <p>Tout commence par un premier appel d'une heure, totalement gratuit. Vous me parlez de votre projet, et je vous donne mes premiers conseils stratégiques, sans engagement.</p>
-                    </div>
-                    <div class="service-item">
-                        <h3>Direction Technique</h3>
-                        <p>Aide à la structuration des équipes, choix des technologies (stack), planification de roadmap et audit de l'existant.</p>
-                    </div>
-                    <div class="service-item">
-                        <h3>Recrutement & Organisation</h3>
-                        <p>Support dans le recrutement de profils techniques clés et mise en place de processus de développement efficaces.</p>
-                    </div>
-                    <div class="service-item">
-                        <h3>Mentoring</h3>
-                        <p>Échanges et confrontation de points de vue avec vos directeurs techniques actuels pour challenger les décisions et apporter un regard extérieur.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="contact">
-            <div class="container">
-                <h2>Contact</h2>
-                <p>Quelque soit sa taile, votre projet mérite un accompagnement et une expertise technique solides.</p>
-                <button class="cta-button" onclick="copyEmail()">Copier mon adresse Email</button>
-                <p id="feedback" style="margin-top: 1rem; color: var(--text-main); height: 1.5rem; opacity: 0; transition: opacity 0.3s; font-size: 0.9rem;">Email copié !</p>
-            </div>
-        </section>
-    </main>
-
-    <footer>
-        <div class="container">
-            <p>&copy; <script>document.write(new Date().getFullYear())</script> Jean-Sébastien Carinos. Tous droits réservés.</p>
-        </div>
-    </footer>
-
-    <script>
-        function getEmail() {
-            const a = 'js';
-            const b = 'carinos';
-            const c = 'ail';
-            return a + '.'+ b + '@' + 'gm' + c + '.' + 'com';
-        }
-
-        function copyEmail() {
-            const email = getEmail();
-            
-            if (navigator.clipboard) {
-                navigator.clipboard.writeText(email).then(showFeedback).catch(err => {
-                    console.error('Erreur', err);
+    
+        <script>
+            function getEmail() {
+                const a = 'js';
+                const b = 'carinos';
+                const c = 'ail';
+                return a + '.' + b + '@' + 'gm' + c + '.' + 'com';
+            }
+    
+            function copyEmail() {
+                const email = getEmail();
+                if (navigator.clipboard) {
+                    navigator.clipboard.writeText(email).then(showFeedback).catch(err => {
+                        console.error('Erreur', err);
+                        fallbackCopy(email);
+                    });
+                } else {
                     fallbackCopy(email);
-                });
-            } else {
-                fallbackCopy(email);
+                }
             }
-        }
-
-        function fallbackCopy(text) {
-            const textArea = document.createElement("textarea");
-            textArea.value = text;
-            document.body.appendChild(textArea);
-            textArea.select();
-            try {
-                document.execCommand("copy");
-                showFeedback();
-            } catch (err) {
-                console.error('Fallback error', err);
-                alert('Email: ' + text);
+    
+            function fallbackCopy(text) {
+                const textArea = document.createElement("textarea");
+                textArea.value = text;
+                document.body.appendChild(textArea);
+                textArea.focus();
+                textArea.select();
+                try {
+                    document.execCommand("copy");
+                    showFeedback();
+                } catch (err) {
+                    console.error('Fallback error', err);
+                    alert('Email: ' + text);
+                }
+                document.body.removeChild(textArea);
             }
-            document.body.removeChild(textArea);
-        }
+    
+            function showFeedback() {
+                const feedback = document.getElementById('feedback');
+                if (!feedback) return;
+                feedback.style.opacity = '1';
+                setTimeout(() => {
+                    feedback.style.opacity = '0';
+                }, 2000);
+            }
+        </script>
+    </body>
 
-        function showFeedback() {
-            const feedback = document.getElementById('feedback');
-            feedback.style.opacity = '1';
-            setTimeout(() => {
-                feedback.style.opacity = '0';
-            }, 2000);
-        }
-    </script>
-</body>
-</html>
+    </html>
